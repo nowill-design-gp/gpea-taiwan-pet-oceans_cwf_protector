@@ -2,7 +2,7 @@ import * as utm from './utm_source_dd.js'
 
 /**
  * http://techslides.com/convert-csv-to-json-in-javascript
- * 
+ *
  * @param  {text}
  * @return {Array}
  */
@@ -30,18 +30,18 @@ $(document).ready(function (){
 	fetch("https://docs.google.com/spreadsheets/d/14mkaWL_SaJ7qlzw0KHOK1scxoUaiNNIrKCXlX0QFZA8/export?format=csv")
 		.then(response => response.text())
 		.then(response => csvJSON(response))
-		.then(response => { // replace the event context      
+		.then(response => { // replace the event context
 		  //console.log('response', response);
 		  document.querySelector(".KI-list").innerHTML = ""
-		  response.forEach(row => {			
+		  response.forEach(row => {
 			let name = row["姓名"];
 			let unit = row["單位"];
 			$('.KI-list').append(`<tr class="tbody__tr"><td class="tbody__td thead__td--name">${name}</td><td class="tbody__td thead__td--title">${unit}</td></tr>`);
-		  });	  
+		  });
 		  $('.KI-list').append(`<tr class="tbody__tr"><td class="tbody__td tbody__td--last" colspan="2">持續新增中...</td></tr>`);
 		  return response
 		});
-	
+
   // scrollbar樣式
   var scrollTb = $('.tbody__wrapper');
   
@@ -62,7 +62,7 @@ $(document).ready(function (){
   $('#fullpage').fullpage({
     navigation: true,
     //scrollOverflow: true,
-    normalScrollElements: '.tbody__wrapper',
+    normalScrollElements: '.tbody__wrapper, .thank-you-page',
     afterLoad: function(anchorLink, index){
       $('.fp-table.active .aos-init').addClass('aos-animate');
       
@@ -76,6 +76,7 @@ $(document).ready(function (){
 
     },
     onLeave: function(){
+      if($('.lightbox').is(':visible')) return false;
       if($('body').hasClass('noscroll') && $('.lightbox').is(':visible')) return false;
 
       $('.fp-table.active .aos-init').removeClass('aos-animate');
@@ -416,16 +417,6 @@ $(document).ready(function (){
 
   $('.header__apply').append('<input class="header__input" type="text" placeholder="電子信箱" autofocus></input>');
   $('.header__input').hide();
-  $('.close').click(function(e){
-    $('.lightbox').fadeOut(100);
-    $('.header__apply').show();
-    $('#fp-nav').show();
-    $("body").removeClass('noscroll');
-    $('.header__apply').show().removeClass('show');
-    $('.header__apply').css('backgroundColor', '');
-    $('.header__input').hide();
-    $('.header__apply span').show();
-  });
 
   var w = $(window).width();
   $(window).resize(function(){
@@ -452,18 +443,47 @@ $(document).ready(function (){
         $('.header__apply').hide();
         $('#fp-nav').hide();
         $('.lightbox').fadeIn();
+        $('.close').fadeIn();
         $("body").addClass('noscroll');
+      });
+      $('.close').click(function(e){
+        $(this).fadeOut(100);
+        $('.lightbox').fadeOut(100);
+        $('.header__apply').show();
+        $('#fp-nav').show();
+        $("body").removeClass('noscroll');
+        $('.header__apply').show().removeClass('show');
+        $('.header__apply').css('backgroundColor', '');
+        $('.header__input').hide();
+        $('.header__apply span').show();
       });
     }else {
       if($('.header').hasClass('enter-mb')) return false;
       $('.header').addClass('enter-mb');
       $('.header__apply, .protect__btn').click(function(e){
         e.preventDefault();
+        $('.nav-icon').css('display', 'none');
         $('.header__apply').hide();
         $('#fp-nav').hide();
         $('.lightbox').fadeIn();
+        $('.close').fadeIn();
         $("body").addClass('noscroll');
       });
+      $('.close').click(function(e){
+        $(this).css('display', 'none');
+        $('.nav-icon').fadeIn(100);
+        $('.lightbox').fadeOut(100);
+        $('.header__apply').show();
+        $('#fp-nav').show();
+        $("body").removeClass('noscroll');
+        $('.header__apply').show().removeClass('show');
+        $('.header__apply').css('backgroundColor', '');
+        $('.header__input').hide();
+        $('.header__apply span').show();
+      });
+      if($('lightbox').css('display', 'block')) {
+        $('.nav-icon').css('display', 'none');
+      }
     }
     if(w<=575){
       $('.study__space-block').css({
@@ -485,12 +505,14 @@ $(document).ready(function (){
 	// }
 
   $('.donate__btn').on('click', function(e){
-	//console.log('donate');
-	window.location.href= "https://supporter.ea.greenpeace.org/tw/s/donate?campaign=cwf&ref=2021-cwf_protector_tkpage";
+  //console.log('donate');
+  window.open('https://supporter.ea.greenpeace.org/tw/s/donate?campaign=cwf&ref=2021-cwf_protector_tkpage', '_blank')
+	// window.location.href= "";
   });
-  
-  $('.fb__btn').on('click', function(e){	
-	window.location.href= "https://www.facebook.com/sharer/sharer.php?u=https://act.gp/3uCHosc";
+
+  $('.fb__btn').on('click', function(e){
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https://act.gp/3uCHosc', '_blank')
+	// window.location.href= "https://www.facebook.com/sharer/sharer.php?u=https://act.gp/3uCHosc";
   });
 
   //$('.fb__btn').width($('.donate__btn').width());
@@ -520,7 +542,7 @@ email.onblur = function(){
 			email: email.value,
 			domains: domains,                       // optional
 			topLevelDomains: topLevelDomains,       // optional
-			suggested: function(suggestion) {		
+			suggested: function(suggestion) {
 				email.insertAdjacentHTML('afterend', `<div id="email-suggestion">您想輸入的是 <strong id="emailSuggestion">${suggestion.full}</strong> 嗎？</div>`);
 				console.log(suggestion)
 				document.getElementById("email-suggestion").onclick = function() {
@@ -550,7 +572,7 @@ let currYear = new Date().getFullYear();
 // generate LINE QR code in the thank you page & hide donate btn
 utm.line_QR_code('#line_block');
 utm.hide_donate_btn('#donate_btn');
-	
+
 // form validation
 $.validator.addMethod(
       'email',
@@ -565,7 +587,7 @@ $.validator.addMethod(
       function (value, element) {
     const phoneReg6 = new RegExp(/^(0|886|\+886)?(9\d{8})$/).test(value);
     const phoneReg7 = new RegExp(/^(0|886|\+886){1}[2-8]-?\d{6,8}$/).test(value);
-      
+
     if ($('#MobilePhone').prop('required')) {
       return this.optional(element) || phoneReg6 || phoneReg7;
     } else if ($('#MobilePhone').val()) {
@@ -583,11 +605,11 @@ $.validator.addMethod(
   $.extend($.validator.messages, {
       required: "必填欄位"
   });
-    
-  $("#signForm").validate({       
-      submitHandler: function() {          
+
+  $("#signForm").validate({
+      submitHandler: function() {
     showFullPageLoading();
-    
+
     let formData = new FormData();
     document.querySelectorAll("#signForm input,select").forEach(function (el, idx) {
       let v = null
@@ -606,17 +628,22 @@ $.validator.addMethod(
       body: formData
     })
     .then(response => {console.log(response); return response.json()})
-    .then(response => {            
-      if (response) {                                  
+    .then(response => {
+      if (response) {
         if (response.Supporter) {
           // add tracking code here
 		  sendPetitionTracking("2021-cwf_oceanprotector");
-		  
+
           console.log('successful');
           //$('.lightbox .close').trigger('click');
 		  // hide the Form, display the thank you div
-			$('.lightbox__form').hide();
-			$('.thank-you-page').css("display","flex");
+      $('.lightbox__form').hide();
+      if($(window).width() > 375) {
+        $('.thank-you-page').css("display","flex");
+      }
+      if($(window).width() <= 375) {
+        $('.thank-you-page').css("display","block");
+      }
         }
       }
       hideFullPageLoading();
@@ -625,13 +652,13 @@ $.validator.addMethod(
       console.log(error);
       alert('送出失敗，請再試一次或聯絡我們')
       hideFullPageLoading();
-      // display the error message                      
+      // display the error message
     });
   }
 });
-  
+
 /**
- * This is a full page loading animation	 
+ * This is a full page loading animation
    */
 const showFullPageLoading = () => {
   if ( !document.querySelector("#page-loading")) {
@@ -672,6 +699,6 @@ const sendPetitionTracking = (eventLabel, eventValue) => {
 	    'contentName': eventLabel,
 	    'contentCategory': 'Petition Signup'
 	});
-} 
+}
 });
 
