@@ -32,7 +32,7 @@
     <script src="https://change.greenpeace.org.tw/2021/petition/oceans-cwf-protector/assets/js/swiper.min.js"></script>
     <script>
       !function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-WRM6WK6",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer")
-      
+
     </script>
   </head>
   <body>
@@ -58,6 +58,7 @@
           <div class="nav-icon">
             <div class="topline"></div>
           </div>
+          <a class="close" href="#" title="關閉"><i class="close-icon"></i></a>
         </div>
       </header>
       <div class="wrapper" id="fullpage">
@@ -65,7 +66,8 @@
           <div class="lightbox__form form">
             <form id="signForm" action="https://cloud.greentw.greenpeace.org/websign" method="POST">
               <div class="container">
-                <h2 class="form__title">成為海洋守護者<br>我們將給您更多活動資訊</h2>
+                <h2 class="form__title"><span>成為海洋守護者</span><br>我們將給您更多活動資訊</h2>
+                <p class="form__desc">更多的守護海洋行動（淨灘、淨海、海洋教育一日體驗...）加入臺灣海洋守護者，獲取更多環境保護活動資訊！</p>
                 <div class="form__container">
                   <div class="form__group">
                     <label class="form__label" for="email"></label>
@@ -80,26 +82,44 @@
                     <input class="form__input validatorFirstname" type="text" id="FirstName" name="FirstName" placeholder="名字" required>
                   </div>
                   <div class="form__group form__group--half form__group--select">
-                    <select class="form__select select" id="Birthdate" name="Birthdate" required></select>
+                    <select class="form__select select" id="Birthdate" name="Birthdate" required><option value="">出生年份</option></select>
                   </div>
                   <div class="form__group form__group--half">
                     <label class="form__label" for="phone"></label>
                     <input class="form__input taiwan-phone validatorPhone" type="text" id="MobilePhone" name="MobilePhone" placeholder="手機號碼" required>
                   </div><span class="form__tips">電話格式範例：0912345678 或 02-23456789</span>
 				  <div class="form__group">
-					<input id="OptIn" name="OptIn" type="checkbox" checked />
-					<label class="form__desc" for="OptIn">
-						我願意收到綠色和平發送的電子通訊，掌握環保工作的最新消息！我並同意綠色和平按照其
-						<a href="https://www.greenpeace.org/taiwan/policies/privacy-and-cookies/?ref=2021-cwf_oceanprotector"
-							title="個人隱私政策" target="_blank">個人隱私政策</a>
-						與我保持聯絡。
-					</label>
-				  </div>
-                  <p class="form__desc">我們將會舉辦更多守護海洋行動（淨灘、淨海、海洋教育一日體驗...）<br>誠摯邀請您加入臺灣海洋守護者，獲取更多環境保護活動資訊！</p>
+            <!-- label.checkbox(for="")
+              .checkbox-box
+                input.input(type="checkbox" checked="checked")
+                span.checkmark
+            p 我同意BeeAD 蜂廣告的會員條款與隱私權政策 -->
+            <div class="checkbox-box">
+              <input id="OptIn" name="OptIn" type="checkbox" checked />
+              <span class="checkmark"></span>
+            </div>
+            <label class="form__desc checkbox" for="OptIn">
+              我願意收到綠色和平發送的電子通訊，掌握環保工作的最新消息！我並同意綠色和平按照其
+              <a href="https://www.greenpeace.org/taiwan/policies/privacy-and-cookies/?ref=2021-cwf_oceanprotector"
+                title="個人隱私政策" target="_blank">個人隱私政策</a>
+              與我保持聯絡。
+            </label>
+            </div>
+          <div class="form__group">
+            <div class="checkbox-box">
+              <input id="Optpdf" name="Optpdf" type="checkbox" checked />
+              <span class="checkmark"></span>
+            </div>
+            <label class="form__desc checkbox" for="Optpdf">
+              我想要索取永續海洋的「永續海鮮選購手冊」(PDF)
+              <!-- <a href="https://www.greenpeace.org/taiwan/policies/privacy-and-cookies/?ref=2021-cwf_oceanprotector"
+                title="永續海鮮選購手冊" target="_blank">永續海鮮選購手冊</a> -->
+            </label>
+          </div>
                   <div class="form-btn__group">
-                    <button class="form__btn" id="submitBtn">立即加入</button><a class="close" href="#" title="關閉">關閉<i class="close-icon"></i></a>
+                    <button class="form__btn" id="submitBtn">立即加入</button>
                   </div>
-				  
+
 				  <input placeholder="MobileCountryCode" name="MobileCountryCode" type="hidden" value="886">
 					<input type="hidden" name="req" value="post_data">
 					<input type="hidden" name="LeadSource" value="Petition - Oceans">
@@ -115,7 +135,7 @@
 					<input type="hidden" name="UtmCampaign" id="UtmCampaign" value="">
 					<input type="hidden" name="UtmContent" id="UtmContent" value="">
 					<input type="hidden" name="UtmTerm" id="UtmTerm" value="">
-					<input type="hidden" name="DonationPageUrl" value="">	
+					<input type="hidden" name="DonationPageUrl" value="">
                 </div>
               </div>
             </form>
@@ -126,16 +146,20 @@
 			<p>綠色和平將持續與更多支持海洋保護的人士，積極向政府、產業界溝通，要求落實海洋保育與立法，並持續進行將海洋環境教育，推廣到公民日常生活中。</p>
 
 			<p>懇請您將守護臺灣海洋行動資訊，轉分享給親朋好友，邀請更多人一同成為海洋守護者。
-			海洋生態永續，需要您進一步的支持，一起為美麗的海洋拿下更多里程碑！</p>
-						
-			<div class="form-btn__group">
-				<a class="close" title="關閉">關閉<i class="close-icon"></i></a>				
-			</div>
+      海洋生態永續，需要您進一步的支持，一起為美麗的海洋拿下更多里程碑！</p>
+
+      <p class="tips">想了解夏季常見的漁獲，臺灣本地常見的漁法、對環境的影響，以及選購原則嗎？永續海鮮選購手冊─夏季版<span class="arrow-icon"></span><a href="https://change.greenpeace.org.tw/2021/reports/%E6%B0%B8%E7%BA%8C%E6%B5%B7%E9%AE%AE%E9%81%B8%E8%B3%BC%E6%89%8B%E5%86%8A.pdf" target="_blank" download>點我開始下載</a></p>
+
+
+
+			<!-- <div class="form-btn__group">
+				<a class="close" title="關閉">關閉<i class="close-icon"></i></a>
+			</div> -->
 			<div class="form-btn__group share__group">
-				<button id="donate_btn" class="form__btn donate__btn">支持我們</button>
-				<button class="fb__btn">Facebook 分享</button>				
+				<button id="donate_btn" class="form__btn donate__btn" type="button">支持我們</button>
+				<button class="fb__btn" type="button">分享守護行動Facebook <span class="arrow-icon"></span></button>
 			</div>
-			
+
 			<div id="line_block"></div>
 		  </div>
 	   </div>
@@ -537,6 +561,33 @@
           </div>
         </section>
       </div>
+      <script>
+        /**
+       * This is a full page loading animation
+         */
+        const showFullPageLoading = () => {
+        if ( !document.querySelector("#page-loading")) {
+          document.querySelector("body").insertAdjacentHTML('beforeend', `
+            <div id="page-loading" class="hide">
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>`);
+            }
+
+            setTimeout(() => { // to enable the transition
+              document.querySelector("#page-loading").classList.remove("hide")
+            }, 0)
+        }
+        /**
+         * Hide the full page loading
+         */
+        const hideFullPageLoading = () => {
+        document.querySelector("#page-loading").classList.add("hide")
+
+            setTimeout(() => {
+              document.querySelector("#page-loading").remove()
+            }, 1100)
+        }
+      </script>
       <script type="module" src="https://cors-anywhere.small-service.gpeastasia.org/https://change.greenpeace.org.tw/2021/petition/oceans-cwf-protector/assets/js/main.js"></script>
     </div>
   </body>
