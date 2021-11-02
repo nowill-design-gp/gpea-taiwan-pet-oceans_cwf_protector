@@ -2149,16 +2149,22 @@ picture img {
   margin: 0 auto;
   box-sizing: border-box;
 }
+@media (max-width: 575px) {
+  .tbody__wrapper {
+    height: calc(100% - 3.5vw);
+  }
+}
 .tbody__wrapper .viewport {
-  width: calc(100% - 12px);
+  width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   position: relative;
 }
 .tbody__wrapper .overview {
   width: 100%;
   list-style: none;
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
   padding: 0;
@@ -2168,6 +2174,7 @@ picture img {
   position: relative;
   float: right;
   width: 10px;
+  display: none;
 }
 .tbody__wrapper .track {
   background: transparent;
@@ -2211,6 +2218,10 @@ picture img {
     font-size: 3.54166667vw;
   }
 }
+.form__btn[href="https://act.gp/protector"]{
+  margin-right: 0;
+}
+
 .noSelect {
   user-select: none;
   -o-user-select: none;

@@ -44,10 +44,7 @@ $(document).ready(function (){
 	
   // scrollbar樣式
   var scrollTb = $('.tbody__wrapper');
-  scrollTb.tinyscrollbar({axis: "y"});
-  $(window).resize(function(){
-    scrollTb.tinyscrollbar_update();
-  }).resize();
+  
 
   $('.tbody__wrapper').on('mousewheel DOMMouseScroll', function(e){
     e.stopPropagation();
@@ -63,16 +60,12 @@ $(document).ready(function (){
   // var $header_top = $('.header');
   AOS.init({});
   $('#fullpage').fullpage({
-  // new fullpage('#fullpage', {
-  //   licenseKey: 'YOUR KEY HERE',
-    //anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8'],
     navigation: true,
     //scrollOverflow: true,
     normalScrollElements: '.tbody__wrapper',
     afterLoad: function(anchorLink, index){
       $('.fp-table.active .aos-init').addClass('aos-animate');
-      //history.pushState(null, null, "index.html");
-      scrollTb.tinyscrollbar_update(0);
+      
     },
     afterRender: function(){
        $('.section--active .aos-init').removeClass('aos-animate');
@@ -84,10 +77,7 @@ $(document).ready(function (){
     },
     onLeave: function(){
       if($('body').hasClass('noscroll') && $('.lightbox').is(':visible')) return false;
-      if(scrollTb.hasClass('moving')){
-        scrollTb.removeClass('moving')
-        return false;
-      }
+
       $('.fp-table.active .aos-init').removeClass('aos-animate');
     },
   });
