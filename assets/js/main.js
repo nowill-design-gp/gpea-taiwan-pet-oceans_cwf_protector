@@ -563,7 +563,7 @@ email.onblur = function(){
  window.addEventListener('DOMContentLoaded', (event) => {
   // create the year options
 let currYear = new Date().getFullYear();
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 90; i++) {
   let option = `<option value="${currYear-i}-01-01">${currYear-i}</option>`;
   let obj = document.getElementById('Birthdate');
   obj.add(new Option(currYear-i, `${currYear-i}-01-01`));
